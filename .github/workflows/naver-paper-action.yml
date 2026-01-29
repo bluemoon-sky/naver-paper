@@ -84,6 +84,6 @@ jobs:
         NAVER_PW: ${{ secrets.MY_NAVER_PW }}
         TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        NO_PAPER_ALARM: "True"
+        NO_PAPER_ALARM: "False"
         LOG_TO_FILE: "False"  # GitHub 로그로 확인하면 되므로 파일 저장 불필요
       run: python get_paper.py
