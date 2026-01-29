@@ -2,9 +2,8 @@ name: Naver Paper Auto Collection
 
 on:
   schedule:
-    # 매일 0, 6, 12, 18시 (UTC 기준) -> 한국 시간 09, 15, 21, 03시
-    # GitHub Actions의 스케줄 정확도는 보장되지 않으므로(지연 가능) 대략적인 시간으로 설정
-    - cron: '0 0,6,12,18 * * *'
+    # NAS 설정(app.cron)과 동일하게 매 시간 50분에 실행
+    - cron: '50 * * * *'
   workflow_dispatch:  # 수동 실행 가능하도록 설정
 
 jobs:
