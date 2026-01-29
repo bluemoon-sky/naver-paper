@@ -38,6 +38,23 @@ jobs:
         pip install playwright
         playwright install chromium
 
+    # [디버그용] Secrets 주입 확인 (값은 가려져서 나옴)
+    - name: Debug Secrets
+      run: |
+        echo "Check NAVER_ID length:"
+        if [ -z "${{ secrets.NAVER_ID }}" ]; then
+          echo "NAVER_ID is EMPTY (Empty string or not set)"
+        else
+          echo "NAVER_ID is SET (It is not empty)"
+        fi
+        
+        echo "Check COOKIE_JSON length:"
+        if [ -z "${{ secrets.COOKIE_JSON_GOODMAN6999 }}" ]; then
+           echo "COOKIE_JSON_GOODMAN6999 is EMPTY"
+        else
+           echo "COOKIE_JSON_GOODMAN6999 is SET"
+        fi
+
     # 5. 쿠키 파일 복원 (Secrets -> json file)
     - name: Restore Cookies
       env:
