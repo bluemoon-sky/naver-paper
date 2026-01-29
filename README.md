@@ -135,9 +135,9 @@ GitHub 저장소의 `Settings` > `Secrets and variables` > `Actions` > `New repo
 
 | 이름 (Name) | 설명 | 예시 |
 |---|---|---|
-| `MY_NAVER_ID` | 네이버 아이디 | `goodman6999` |
+| `MY_NAVER_ID` | 네이버 아이디 | `naverid1234` |
 | `MY_NAVER_PW` | 네이버 비밀번호 | `password1234` |
-| `COOKIE_JSON_GOODMAN6999` | `goodman6999.json` 파일 전체 내용 | `{"cookies": ...}` |
+| `COOKIE_JSON_NAVERID1234` | `naver1234.json` 파일 전체 내용 | `{"cookies": ...}` |
 | `TELEGRAM_TOKEN` | 텔레그램 봇 토큰 (선택) | `123456:ABC...` |
 | `TELEGRAM_CHAT_ID` | 텔레그램 채팅 ID (선택) | `12345678` |
 
