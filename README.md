@@ -131,7 +131,7 @@ Docker 기반 실행(NAS/서버)과 별도로, **추가 계정**의 IP 분리를
 본 프로젝트를 자신의 **Private Repository**로 Fork하거나 Push합니다. (**중요**: `config.py`나 `.env`에 민감 정보가 포함될 수 있으므로 반드시 Private으로 설정하세요)
 
 ### 2. Secrets 등록
-GitHub 저장소의 `Settings` > `Secrets and variables` > `Actions` > `New repository secret` 버튼을 눌러 다음 변수들을 등록합니다.
+GitHub 저장소의 `Settings` > `Secrets and variables` > `Actions` > `New repository secret` 버튼을 눌러 다음 변수들을 등록합니다. 각각의 이름을 Secrets에 등록해야한다. MY_NAVER_ID, MY_NAVER_PW, .....
 
 | 이름 (Name) | 설명 | 예시 |
 |---|---|---|
