@@ -123,6 +123,31 @@ docker compose up -d
 
 최초 실행시 네이버 폐지 줍기를 한 번 실행합니다.
 
+## GitHub Actions 설정 (멀티 계정/IP 분리)
+
+Docker 기반 실행(NAS/서버)과 별도로, **추가 계정**의 IP 분리를 위해 GitHub Actions를 사용할 수 있습니다. GitHub Actions는 실행 시마다 새로운 Azure IP를 할당받으므로, 네이버의 동일 IP 포인트 적립 제한을 우회하는 데 유용합니다.
+
+### 1. GitHub 저장소 설정
+본 프로젝트를 자신의 **Private Repository**로 Fork하거나 Push합니다. (**중요**: `config.py`나 `.env`에 민감 정보가 포함될 수 있으므로 반드시 Private으로 설정하세요)
+
+### 2. Secrets 등록
+GitHub 저장소의 `Settings` > `Secrets and variables` > `Actions` > `New repository secret` 버튼을 눌러 다음 변수들을 등록합니다.
+
+| 이름 (Name) | 설명 | 예시 |
+|---|---|---|
+| `MY_NAVER_ID` | 네이버 아이디 | `goodman6999` |
+| `MY_NAVER_PW` | 네이버 비밀번호 | `password1234` |
+| `COOKIE_JSON_GOODMAN6999` | `goodman6999.json` 파일 전체 내용 | `{"cookies": ...}` |
+| `TELEGRAM_TOKEN` | 텔레그램 봇 토큰 (선택) | `123456:ABC...` |
+| `TELEGRAM_CHAT_ID` | 텔레그램 채팅 ID (선택) | `12345678` |
+
+> **주의**: `COOKIE_JSON_...` 값은 로컬 PC에서 `save_cookies.py`로 생성한 json 파일의 내용을 **처음부터 끝까지(괄호 포함)** 모두 복사해서 붙여넣어야 합니다.
+
+### 3. 작동 방식
+* `.github/workflows/naver-paper-action.yml` 설정에 따라 **매 시간 50분**에 자동 실행됩니다.
+* GitHub Actions 서버(Ubuntu)에서 실행되므로 NAS/집 IP와 겹치지 않습니다.
+* 무료 계정의 경우 월 2,000분의 실행 시간이 제공되며, 본 스크립트는 월 약 600분 내외를 소모하므로 무료로 충분히 운영 가능합니다.
+
 ## 네이버 로그인 관련
 
 ### 2단계 인증 설정
