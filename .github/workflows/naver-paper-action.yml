@@ -41,14 +41,16 @@ jobs:
     # [디버그용] Secrets 주입 확인 (안전한 방식)
     - name: Debug Secrets
       env:
-        DEBUG_NAVER_ID: ${{ secrets.MY_NAVER_ID }}
+        DEBUG_PW: ${{ secrets.MY_NAVER_PW }}
         DEBUG_COOKIE: ${{ secrets.COOKIE_JSON_GOODMAN6999 }}
       run: |
-        echo "Check NAVER_ID..."
-        if [ -z "$DEBUG_NAVER_ID" ]; then
-          echo "❌ MY_NAVER_ID is EMPTY! Check GitHub Secrets."
+        echo "NAVER_ID is hardcoded to 'goodman6999' (Bypassing Secret issue)"
+        
+        echo "Check MY_NAVER_PW..."
+        if [ -z "$DEBUG_PW" ]; then
+          echo "❌ MY_NAVER_PW is EMPTY! Check GitHub Secrets."
         else
-          echo "✅ MY_NAVER_ID is SET (Value: $DEBUG_NAVER_ID)"
+          echo "✅ MY_NAVER_PW is SET (Value is masked)"
         fi
         
         echo "Check COOKIE_JSON..."
@@ -56,12 +58,15 @@ jobs:
            echo "❌ COOKIE_JSON_GOODMAN6999 is EMPTY!"
         else
            echo "✅ COOKIE_JSON_GOODMAN6999 is SET (Length: ${#DEBUG_COOKIE})"
+           if [ ${#DEBUG_COOKIE} -lt 200 ]; then
+             echo "⚠️ WARNING: Cookie JSON seems too short! (Length: ${#DEBUG_COOKIE}). Did you paste the content correctly?"
+           fi
         fi
 
     # 5. 쿠키 파일 복원 (Secrets -> json file)
     - name: Restore Cookies
       env:
-        NAVER_ID: ${{ secrets.MY_NAVER_ID }}
+        NAVER_ID: "goodman6999"
         COOKIE_JSON_GOODMAN6999: ${{ secrets.COOKIE_JSON_GOODMAN6999 }}
       run: python restore_cookies_from_env.py
 
@@ -69,7 +74,7 @@ jobs:
     - name: Run Naver Paper Script
       env:
         # config.py가 이 환경변수들을 읽어서 사용함
-        NAVER_ID: ${{ secrets.MY_NAVER_ID }}
+        NAVER_ID: "goodman6999"
         NAVER_PW: ${{ secrets.MY_NAVER_PW }}
         TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
